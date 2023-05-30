@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'QuizCreatorPro'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C7285C716FD54D05AF72670A904E9532 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6F571F3C0ACD4245BE3BBC1F8B4B5905 }}
