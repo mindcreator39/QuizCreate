@@ -16,7 +16,7 @@ jobs:
       - name: Set up Python version
         uses: actions/setup-python@v2
         with:
-          python-version: '3.11'
+          python-version: '3.'
 
       - name: Install system dependencies
         run: sudo apt-get update && sudo apt-get install -y python3-dev gcc libblas-dev liblapack-dev gfortran
