@@ -6,7 +6,8 @@ import csv
 
 # Flask app initialization
 app = Flask(__name__)
-
+def home():
+    return "Hello, world!"
 openai.api_key = "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"
 questions = []
 
