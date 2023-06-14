@@ -1,9 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home Page</title>
+  <title>問題生成アプリ</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-    <h1>Welcome to my website!</h1>
+  <div id="app">
+    <textarea v-model="inputText"></textarea>
+    <div>
+      APIキー：
+      <input type="text" v-model="apiKey">
+    </div>
+    <div>
+      問題数：
+      <input type="number" v-model="questionCount" min="1">
+      <button @click="generateQuestions">問題生成</button>
+    </div>
+    <div v-if="questions.length > 0">
+      <h2>問題一覧</h2>
+      <ul>
+        <li v-for="(question, index) in questions" :key="index">
+          {{ question }}
+        </li>
+      </ul>
+      <button @click="downloadCSV">CSVダウンロード</button>
+    </div>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        inputText: '',
+        apiKey: '',
+        questionCount: 1,
+        questions: []
+      },
+
+      methods: {
+        generateQuestions: function() {
+          // サーバーサイドの処理に inputText と apiKey、questionCount を送信する
+          // ここでは単純に改行で分割して問題とする
+          // APIキーを使用する場合は、適切な方法でAPIリクエストを行うことになるでしょう
+          var requestData = {
+            inputText: this.inputText,
+            apiKey: this.apiKey,
+            questionCount: this.questionCount
+          };
+
+          // バックエンドへのAPIリクエスト処理を行う（例：axiosを使用）
+          axios.post('/api/generateQuestions', requestData)
+            .then(response => {
+              this.questions = response.data;
+            })
+            .catch(error => {
+              console.error(error);
+            });
+        },
+        downloadCSV: function() {
+          // CSVファイルのダウンロード処理
+          var csvContent = 'data:text/csv;charset=utf-8,';
+          this.questions.forEach(function(question) {
+            csvContent += question + '\n';
+          });
+          var encodedURI = encodeURI(csvContent);
+          var link = document.createElement('a');
+          link.setAttribute('href', encodedURI);
+          link.setAttribute('download', 'questions.csv');
+          document.body.appendChild(link);
+          link.click();
+        }
+      }
+    });
+  </script>
 </body>
 </html>
