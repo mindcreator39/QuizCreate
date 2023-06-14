@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, send_file
+from flask import render_template
 from werkzeug.exceptions import BadRequest
 import openai
 import math
@@ -8,7 +9,7 @@ import csv
 app = Flask(__name__)
 @app.route('/')
 def home():
-    return "Hello, world!"
+    return render_template('home.html')
 openai.api_key = "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"
 questions = []
 
