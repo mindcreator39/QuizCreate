@@ -1,29 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home Page</title>
+  <title>問題生成アプリ</title>
+
+  <style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+  }
+
+  #app {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+  }
+
+  textarea, input, button {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+
+  button {
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  button:disabled {
+    background-color: #ccc;
+  }
+
+  h2 {
+    margin-top: 50px;
+  }
+  </style>
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script>
-$(document).ready(function(){
-  $('#generateButton').click(function(){
-    var inputText = $('#inputText').val();
-    var apiKey = $('#apiKey').val();
-    var questionCount = $('#questionCount').val();
-
-    var requestData = {
-      inputText: inputText,
-      apiKey: apiKey,
-      questionCount: questionCount
-    };
-
-    $('#generateButton').prop('disabled', true);
-
-    axios.post('/api/generateQuestions', requestData)
-      .then(function途中で切れてしまったようです。以下にJavaScriptのコードを完全な形で提示します：
-
-```html
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
@@ -71,6 +90,23 @@ $(document).ready(function(){
 });
 </script>
 <body>
-    <h1>Welcome to my website!</h1>
+  <div id="app">
+    <textarea id="inputText"></textarea>
+    <div>
+      APIキー：
+      <input type="text" id="apiKey">
+    </div>
+    <div>
+      問題数：
+      <input type="number" id="questionCount" min="1">
+      <button id="generateButton">問題生成</button>
+    </div>
+    <div id="questionList">
+      <h2>問題一覧</h2>
+      <ul id="questions">
+      </ul>
+      <button id="downloadButton">CSVダウンロード</button>
+    </div>
+  </div>
 </body>
 </html>
