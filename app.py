@@ -10,16 +10,6 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     return render_template('home.html')
-@app.route('/api/generateQuestions', methods=['POST'])
-def generate_questions():
-    data = request.json
-    input_text = data['inputText']
-    api_key = data['apiKey']
-    question_count = data['questionCount']
-
-    # ここで問題を生成するロジックを実装します。
-
-    return jsonify(questions)
 openai.api_key = "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"
 questions = []
 
